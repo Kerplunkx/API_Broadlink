@@ -34,13 +34,13 @@ def obtener_estado():
 def set_estado(estado):
     global estadoAC
     if int(estado) == 1:
-        estadoAC = estado
+        estadoAC = int(estado)
         bc.temp_20_AC(device)
-        response = {'Message': 'success'}
+        response = {'Message': 'Se encendio el aire'}
     elif int(estado) == 0:
-        estadoAC = estado
+        estadoAC = int(estado)
         bc.turn_off_AC(device)
-        response = {'Message': 'success'}
+        response = {'Message': 'Se apagao el aire'}
     else:
         response = {'Message': 'error (0: apagado, 1: encendido)'}
     return jsonify(response)
@@ -50,32 +50,40 @@ def set_temperatura(temp):
     global estadoAC
     if estadoAC == 1:
         global temperaturaAC 
-        temperaturaAC = temp
         if int(temp)==16:
+            temperaturaAC = int(temp)
             bc.temp_16_AC(device)
             response = {'Message': 'success'}
         elif int(temp)==17:
+            temperaturaAC = int(temp)
             bc.temp_17_AC(device)
             response = {'Message': 'success'}
         elif int(temp)==18:
+            temperaturaAC = int(temp)
             bc.temp_18_AC(device)
             response = {'Message': 'success'}
         elif int(temp)==19:
+            temperaturaAC = int(temp)
             bc.temp_19_AC(device)
             response = {'Message': 'success'}
         elif int(temp)==20:
+            temperaturaAC = int(temp)
             bc.temp_20_AC(device)
             response = {'Message': 'success'}
         elif int(temp)==21:
+            temperaturaAC = int(temp)
             bc.temp_21_AC(device)
             response = {'Message': 'success'}
         elif int(temp)==22:
+            temperaturaAC = int(temp)
             bc.temp_22_AC(device)
             response = {'Message': 'success'}
         elif int(temp)==23:
+            temperaturaAC = int(temp)
             bc.temp_23_AC(device)
             response = {'Message': 'success'}
         elif int(temp)==24:
+            temperaturaAC = int(temp)
             bc.temp_24_AC(device)
             response = {'Message': 'success'}
         else:
