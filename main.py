@@ -32,6 +32,7 @@ def obtener_estado():
 
 @app.route('/api/v1/ac/estado/<estado>', methods=['PATCH'])
 def set_estado(estado):
+    global estadoAC
     if int(estado) == 1:
         estadoAC = estado
         bc.temp_20_AC(device)
