@@ -3,7 +3,8 @@ import constantes
 
 # Conexión al dispositivo Broadlink (verificar direccion ip en archivo de constantes)
 def busqueda_dispositivos():
-    devices = broadlink.discover(discover_ip_address=constantes.broadcast)
+    devices = broadlink.discover()
+    #devices = broadlink.discover(discover_ip_address=constantes.broadcast)
     while(len(devices)==0):
         print("No existen dispositivos disponibles")
         devices = broadlink.discover(discover_ip_address=constantes.broadcast)
