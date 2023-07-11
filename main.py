@@ -33,8 +33,10 @@ def obtener_estado():
 @app.route('/api/v1/ac/estado/<estado>', methods=['PATCH'])
 def set_estado(estado):
     global estadoAC
+    global temperaturaAC
     if int(estado) == 1:
         estadoAC = int(estado)
+        temperaturaAC=int(20)
         bc.temp_20_AC(device)
         response = {'Message': 'Se encendio el aire'}
     elif int(estado) == 0:
