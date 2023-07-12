@@ -7,7 +7,8 @@ def busqueda_dispositivos():
     #devices = broadlink.discover(discover_ip_address=constantes.broadcast)
     while(len(devices)==0):
         print("No existen dispositivos disponibles")
-        devices = broadlink.discover(discover_ip_address=constantes.broadcast)
+        #devices = broadlink.discover(discover_ip_address=constantes.broadcast)
+        devices = broadlink.discover()
     device=devices[0]
     device.auth()
     print("Se ha establecido conexion con dispositivo broadlink")
