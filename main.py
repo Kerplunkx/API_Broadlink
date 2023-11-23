@@ -2,6 +2,7 @@ import broadlink_control as bc
 from flask import Flask, jsonify
 from flask_cors import CORS
 from conf import config
+from mqtt_conf import variables, run_client
 
 temperaturaAC = 20
 estadoAC = 0
@@ -28,6 +29,11 @@ def obtener_temperatura():
 def obtener_estado():
     response = {'Message': estadoAC}
     return jsonify(response)
+
+
+@app.route('/api/v1/ac/variables', methods=['GET'])
+def get_variables():
+    return jsonify(variables)
 
 
 @app.route('/api/v1/ac/estado/<estado>', methods=['PATCH'])
@@ -67,6 +73,7 @@ def set_temperatura(temp):
 if __name__ == '__main__':
     device = bc.busqueda_dispositivos()
     if device:
+        run_client()
         app.run(host='0.0.0.0', debug=False)
     else:
         print("No se encontraron broadlinks en la red")
