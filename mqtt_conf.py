@@ -5,8 +5,10 @@ PORT = 1883
 BASE_TOPIC = 'dschica/estacion/'
 USERNAME = 'YOUR_USERNAME'
 PASSWORD = 'YOUR_PASSWORD'
+BASE_TOPIC_2 = 'aclearn/'
 
-variables = {"temperatura": "", "humedad": "", "velocidad": ""}
+variables = {"temperatura": "", "humedad": "",
+             "velocidad": "", "votos": "", "ocupancia": ""}
 
 
 def connect_mqtt() -> mqtt_client:
@@ -16,7 +18,7 @@ def connect_mqtt() -> mqtt_client:
         else:
             print('La conexion al Broker ha fallado')
 
-    client = mqtt_client.Client("some_id")
+    client = mqtt_client.Client("estacion_id")
     client.username_pw_set(USERNAME, PASSWORD)
     client.on_connect = on_connect
     client.connect(BROKER, PORT)
@@ -25,10 +27,14 @@ def connect_mqtt() -> mqtt_client:
 
 def subscribe(client: mqtt_client):
     def on_message(client, userdata, msg):
-        variables[msg.topic[len(BASE_TOPIC):]] = msg.payload.decode()
+        topic = msg.topic.split("/")[-1]
+        global variables
+        variables[topic] = msg.payload.decode()
     client.subscribe([(BASE_TOPIC + "temperatura", 0),
                      (BASE_TOPIC + "humedad", 0),
-                     (BASE_TOPIC + "velocidad", 0)])
+                     (BASE_TOPIC + "velocidad", 0),
+                     (BASE_TOPIC_2 + "votos", 0),
+                     (BASE_TOPIC_2 + "ocupancia", 0)])
     client.on_message = on_message
 
 
