@@ -1,11 +1,15 @@
 from paho.mqtt import client as mqtt_client
+from os import getenv
+from dotenv import load_dotenv
 
-BROKER = '200.126.14.229'
+load_dotenv()
+
+BROKER = getenv("BROKER")
 PORT = 1883
-BASE_TOPIC = 'dschica/estacion/'
-USERNAME = 'YOUR_USERNAME'
-PASSWORD = 'YOUR_PASSWORD'
-BASE_TOPIC_2 = 'aclearn/'
+BASE_TOPIC = getenv("BASE_TOPIC")
+USERNAME = getenv("USERNAME")
+PASSWORD = getenv("PASSWORD")
+BASE_TOPIC_2 = getenv("BASE_TOPIC_2")
 
 variables = {"temperatura": "", "humedad": "",
              "velocidad": "", "votos": "", "ocupancia": ""}

@@ -1,5 +1,5 @@
 import broadlink_control as bc
-from flask import Flask, jsonify
+from flask import Flask, jsonify, make_response
 from flask_cors import CORS
 from conf import config
 from mqtt_conf import variables, run_client
@@ -66,8 +66,9 @@ def set_temperatura(temp):
         else:
             response = {'Message': 'temperatura fuera del rango (16-24)'}
     else:
-        response = {'Message': 'Encienda el A/C'}
-    return jsonify(response)
+        response = make_response(jsonify({'Message': 'Encienda el A/C'}))
+        response.status_code = 400
+    return response
 
 
 if __name__ == '__main__':
