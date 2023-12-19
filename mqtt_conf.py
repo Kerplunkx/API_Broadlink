@@ -12,7 +12,8 @@ PASSWORD = getenv("PASSWORD")
 BASE_TOPIC_2 = getenv("BASE_TOPIC_2")
 
 variables = {"temperatura": "", "humedad": "",
-             "velocidad": "", "votos": "", "ocupancia": ""}
+             "velocidad": "", "votos": "", "ocupancia": "",
+             "estado_actual": "", "accion_realizada": ""}
 
 
 def connect_mqtt() -> mqtt_client:
@@ -38,7 +39,9 @@ def subscribe(client: mqtt_client):
                      (BASE_TOPIC + "humedad", 0),
                      (BASE_TOPIC + "velocidad", 0),
                      (BASE_TOPIC_2 + "votos", 0),
-                     (BASE_TOPIC_2 + "ocupancia", 0)])
+                     (BASE_TOPIC_2 + "ocupancia", 0),
+                     (BASE_TOPIC_2 + "qlearning/estado_actual", 0),
+                     (BASE_TOPIC_2 + "qlearning/accion_realizada", 0)])
     client.on_message = on_message
 
 
